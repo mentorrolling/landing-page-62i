@@ -1,8 +1,12 @@
 import React from "react";
 
-const NavBar = () => {
+const NavBar = ({ darkMode, changeMode }) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav
+      className={`navbar navbar-expand-lg ${
+        darkMode ? "bg-dark navbar-dark" : "bg-body-tertiary"
+      }`}
+    >
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <i className="fa fa-ravelry" aria-hidden="true"></i>
@@ -30,6 +34,17 @@ const NavBar = () => {
               <a className="nav-link" href="#">
                 Contacto
               </a>
+            </li>
+            <li className="nav-item">
+              <div className="form-check form-switch">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  onChange={changeMode}
+                />
+              </div>
             </li>
           </ul>
         </div>
