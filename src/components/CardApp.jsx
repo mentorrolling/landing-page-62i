@@ -1,10 +1,11 @@
 import React from "react";
+import "../css/card.css";
 
-const CardApp = ({ item }) => {
+const CardApp = ({ item, darkMode }) => {
   console.log(item);
   return (
     <div className="col-12 col-md">
-      <div className="card h-100">
+      <div className={`card h-100 ${darkMode && "bg-dark"}`}>
         <div className="card-body d-flex flex-column align-items-center">
           <i
             className={`fa ${item.icono} fa-4x text-primary`}
