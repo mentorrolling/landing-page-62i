@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
 import obtenerClima from "../helpers/obtener-clima";
 import "../css/navbar.css";
-const NavBar = ({ darkMode, changeMode }) => {
+const NavBar = ({ darkMode, changeMode, estadoLogin }) => {
   const [tiempo, setTiempo] = useState(null);
 
   //Cuando se monta el componente
@@ -40,10 +41,10 @@ const NavBar = ({ darkMode, changeMode }) => {
         }`}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             <i className="fa fa-ravelry" aria-hidden="true"></i>
             Kindel
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -58,15 +59,37 @@ const NavBar = ({ darkMode, changeMode }) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link fw-bold" : "nav-link"
+                  }
+                  to="/"
+                >
                   Inicio
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link fw-bold" : "nav-link"
+                  }
+                  to="/contact"
+                >
                   Contacto
-                </a>
+                </NavLink>
               </li>
+              {estadoLogin && (
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "nav-link fw-bold" : "nav-link"
+                    }
+                    to="/admin"
+                  >
+                    Administrador
+                  </NavLink>
+                </li>
+              )}
             </ul>
             {tiempo ? (
               <div className="d-flex gap-2 align-items-center justify-content-center me-2">
@@ -76,10 +99,15 @@ const NavBar = ({ darkMode, changeMode }) => {
                   className="icon-tiempo bg-dark"
                   title={tiempo.clima.description}
                 />
-                <span>{Math.round(tiempo.temp)}°C</span>
+                <span className={darkMode && "text-white"}>
+                  {Math.round(tiempo.temp)}°C
+                </span>
               </div>
             ) : (
-              <div className="spinner-border me-2" role="status">
+              <div
+                className="spinner-border spinner-border-sm me-2"
+                role="status"
+              >
                 <span className="visually-hidden">Loading...</span>
               </div>
             )}
@@ -93,6 +121,14 @@ const NavBar = ({ darkMode, changeMode }) => {
                 onChange={changeMode}
               />
             </div>
+            <Link
+              className={
+                darkMode ? "btn btn-outline-light" : "btn btn-outline-dark"
+              }
+              to="/login"
+            >
+              {estadoLogin ? "LogOut" : "LogIn"}
+            </Link>
           </div>
         </div>
       </nav>
