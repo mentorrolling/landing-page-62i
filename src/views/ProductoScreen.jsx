@@ -1,10 +1,17 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { productos } from "../data/productos";
 import imagen from "../assets/03.jpg";
 
 const ProductoScreen = ({ darkMode }) => {
+  const { idProd } = useParams();
+
+  const productoEncontrado = productos.find((item) => {
+    return item.id == idProd;
+  });
+
   return (
     <div className="container">
       <div className="row mt-5">
@@ -16,8 +23,8 @@ const ProductoScreen = ({ darkMode }) => {
               </div>
               <div className="col-md-8">
                 <div className="card-body">
-                  <h5 className="card-title">{}</h5>
-                  <p className="card-text">{}</p>
+                  <h5 className="card-title">{productoEncontrado.producto}</h5>
+                  <p className="card-text">{productoEncontrado.detalle}</p>
 
                   <div>
                     <Link className="btn btn-success" to="/buy">

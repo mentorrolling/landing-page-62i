@@ -8,7 +8,9 @@ import ContactScreen from "./views/ContactScreen";
 import ErrorScreen from "./views/ErrorScreen";
 import AdminScreen from "./views/AdminScreen";
 import LoginScreen from "./views/LoginScreen";
+import ProductoScreen from "./views/ProductoScreen";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
+import BuyScreen from "./views/BuyScreen";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -44,6 +46,11 @@ function App() {
             path="/contact"
             element={<ContactScreen darkMode={darkMode} />}
           />
+          <Route
+            path="/product/:idProd"
+            element={<ProductoScreen darkMode={darkMode} />}
+          />
+          <Route path="/buy" element={<BuyScreen darkMode={darkMode} />} />
           <Route path="*" element={<ErrorScreen />} />
         </Routes>
       </BrowserRouter>
