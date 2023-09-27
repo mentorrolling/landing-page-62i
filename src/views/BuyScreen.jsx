@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import imagen from "../assets/02.jpg";
+import CardBuyApp from "../components/CardBuyApp";
 
 const BuyScreen = ({ darkMode }) => {
   const precio = 600;
@@ -50,7 +51,7 @@ const BuyScreen = ({ darkMode }) => {
             </div>
           </div>
         </div>
-        <div className="row mt-5">{/* Sección de pago con tarjeta  */}</div>
+        <div className="row mt-5">{/* <CardBuyApp /> */}</div>
       </div>
     </>
   );

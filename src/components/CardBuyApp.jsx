@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import Cards from "react-credit-cards-2";
+import "react-credit-cards-2/dist/es/styles-compiled.css";
+import {
+  formatCreditCardNumber,
+  formatCVC,
+  formatExpirationDate,
+} from "../helpers/util";
 
 const CardBuyApp = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -10,25 +17,59 @@ const CardBuyApp = () => {
     focus: "",
   });
 
-  const handleInputChange = () => {};
+  const handleInputChange = ({ target }) => {
+    //validar los formatos
+    if (target.name === "number") {
+      target.value = formatCreditCardNumber(target.value);
+    } else if (target.name === "expiry") {
+      target.value = formatExpirationDate(target.value);
+    } else if (target.name === "cvc") {
+      target.value = formatCVC(target.value);
+    }
+    setState({ ...state, [target.name]: target.value });
+  };
+
+  const handleInputFocus = (e) => {
+    setState({ ...state, focus: e.target.name });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowMessage(true);
+    setState({
+      number: "",
+      expiry: "",
+      cvc: "",
+      name: "",
+      focus: "",
+    });
+    setTimeout(() => {
+      setShowMessage(false);
+      //redireccion al home
+    }, 3000);
   };
 
   return (
     <>
-      <div className="col-12 col-md-4 offset-md-2 mb-3">{/* Tarjeta  */}</div>
+      <div className="col-12 col-md-4 offset-md-2 mb-3">
+        <Cards
+          number={state.number}
+          expiry={state.expiry}
+          cvc={state.cvc}
+          name={state.name}
+          focused={state.focus}
+        />
+      </div>
       <div className="col-12 col-md-4">
-        <form onSubmit="">
+        <form onSubmit={handleSubmit}>
           <input
             type="tel"
             name="number"
             className="form-control"
             placeholder="Número de Tarjeta"
-            value=""
-            onChange=""
-            onFocus=""
+            value={state.number}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
           />
           <div className="my-3">
             <input
@@ -37,9 +78,9 @@ const CardBuyApp = () => {
               className="form-control"
               placeholder="Nombre del titular"
               required
-              value=""
-              onChange=""
-              onFocus=""
+              value={state.name}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
             />
           </div>
           <div className="d-flex gap-2 mb-3">
@@ -47,12 +88,12 @@ const CardBuyApp = () => {
               type="tel"
               name="expiry"
               max={"4"}
-              value=""
+              value={state.expiry}
               className="form-control"
               placeholder="Fecha de vencimiento"
               required
-              onChange=""
-              onFocus=""
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
             />
             <input
               type="tel"
@@ -60,9 +101,9 @@ const CardBuyApp = () => {
               className="form-control"
               placeholder="CVC"
               required
-              value=""
-              onChange=""
-              onFocus=""
+              value={state.cvc}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
             />
           </div>
           <div className="d-grid">
