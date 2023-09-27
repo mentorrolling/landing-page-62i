@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Registroapp = () => {
+const NewProductApp = () => {
     const {register, handleSubmit, formState:{errors}} = useForm();
 
     const newProduct = (data) => {
@@ -12,7 +12,7 @@ const Registroapp = () => {
 
   return (
     <form noValidate onSubmit={handleSubmit(newProduct)} className="bg-light text-dark p-3 rounded w-100">
-      <h1 className="text-center">Formulario</h1>
+      <h1 className="text-center">Nuevo producto</h1>
       <section className="row">
         <fieldset className="col-12 col-md-6 mb-2">
           <label htmlFor="nameProduct-input" className="form-label">
@@ -130,11 +130,11 @@ const Registroapp = () => {
       </section>
       <div className="text-end">
         <button type="submit" className="btn btn-primary">
-          Enviar
+          Guardar
         </button>
       </div>
     </form>
   );
 };
 
-export default Registroapp;
+export default NewProductApp;
