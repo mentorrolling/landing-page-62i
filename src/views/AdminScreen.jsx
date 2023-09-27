@@ -1,4 +1,5 @@
 import React from "react";
+import Registroapp from "../components/Registroapp";
 
 const AdminScreen = () => {
   return (
@@ -6,6 +7,8 @@ const AdminScreen = () => {
       <div className="row">
         <div className="col">
           <h1>Administrador 👍</h1>
+          <h2>Nuevo producto</h2>
+          <Registroapp></Registroapp>
         </div>
       </div>
     </div>
