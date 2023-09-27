@@ -1,4 +1,5 @@
 import React from "react";
+import NewProductApp from "../components/NewProductApp";
 
 const AdminScreen = () => {
   return (
@@ -6,6 +7,7 @@ const AdminScreen = () => {
       <div className="row">
         <div className="col">
           <h1>Administrador 👍</h1>
+          <NewProductApp></NewProductApp>
         </div>
       </div>
     </div>
